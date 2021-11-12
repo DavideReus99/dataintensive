@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>temp-163671248146544312</title>
+<title>temp-163673442699305959</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13123,7 +13123,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Descrizione-del-problema"><strong>Descrizione del problema</strong><a class="anchor-link" href="#Descrizione-del-problema">&#182;</a></h3><p>Vogliamo entrare nel mercato statunitense automobilistico, e il nostro obiettivo è stabilire il prezzo di entrata dei nostri veicoli, in base alle loro caratteristiche.
+<h2 id="Descrizione-del-problema"><strong>Descrizione del problema</strong><a class="anchor-link" href="#Descrizione-del-problema">&#182;</a></h2><p>Vogliamo entrare nel mercato statunitense automobilistico, e il nostro obiettivo è stabilire il prezzo di entrata dei nostri veicoli, in base alle loro caratteristiche.
 Si tratta di un problema di regressione, in quanto la variabile da predire è continua.</p>
 
 </div>
@@ -13132,20 +13132,22 @@ Si tratta di un problema di regressione, in quanto la variabile da predire è co
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Caricamento-librerie"><strong>Caricamento librerie</strong><a class="anchor-link" href="#Caricamento-librerie">&#182;</a></h3><p>Carichiamo le librerie necessarie per effettuare operazioni sui dati.</p>
+<h2 id="Caricamento-librerie"><strong>Caricamento librerie</strong><a class="anchor-link" href="#Caricamento-librerie">&#182;</a></h2><p>Carichiamo le librerie necessarie per effettuare operazioni sui dati.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
@@ -13158,17 +13160,22 @@ Si tratta di un problema di regressione, in quanto la variabile da predire è co
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Caricamento-dati"><strong>Caricamento dati</strong><a class="anchor-link" href="#Caricamento-dati">&#182;</a></h3><p>Il dataset contiene informazioni su circa 200 automobili.</p>
-
+<h2 id="Caricamento-dati"><strong>Caricamento dati</strong><a class="anchor-link" href="#Caricamento-dati">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/content/drive/MyDrive/CarPrice_Assignment.csv&#39;</span><span class="p">)</span>
+<div class=" highlight hl-python"><pre><span></span><span class="n">dataset_url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/DavideReus99/dataintensive/raw/main/CarPrice_Assignment.csv&quot;</span>
+<span class="n">dataset_filename</span> <span class="o">=</span> <span class="s2">&quot;CarPrice_Assignment.csv&quot;</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dataset_filename</span><span class="p">):</span>
+  <span class="n">urlretrieve</span><span class="p">(</span><span class="n">dataset_url</span><span class="p">,</span> <span class="n">dataset_filename</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dataset_filename</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 
 <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -13183,7 +13190,7 @@ Si tratta di un problema di regressione, in quanto la variabile da predire è co
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[74]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -13394,7 +13401,7 @@ Si tratta di un problema di regressione, in quanto la variabile da predire è co
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Analisi-esplorativa"><strong>Analisi esplorativa</strong><a class="anchor-link" href="#Analisi-esplorativa">&#182;</a></h3>
+<h2 id="Analisi-esplorativa"><strong>Analisi esplorativa</strong><a class="anchor-link" href="#Analisi-esplorativa">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -13407,7 +13414,7 @@ Si tratta di un problema di regressione, in quanto la variabile da predire è co
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
@@ -13423,7 +13430,7 @@ Si tratta di un problema di regressione, in quanto la variabile da predire è co
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[75]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -13448,7 +13455,7 @@ Si tratta di un problema di regressione, in quanto la variabile da predire è co
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -13549,7 +13556,7 @@ memory usage: 41.8+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;car_ID&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -13566,7 +13573,7 @@ memory usage: 41.8+ KB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[77]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -13806,7 +13813,7 @@ memory usage: 41.8+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
@@ -13822,7 +13829,7 @@ memory usage: 41.8+ KB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[78]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -14030,7 +14037,7 @@ memory usage: 41.8+ KB
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Pulizia-dei-dati"><strong>Pulizia dei dati</strong><a class="anchor-link" href="#Pulizia-dei-dati">&#182;</a></h3><p>La pulizia dei dati è necessaria a fornire al modello una corretta rappresentazione della realtà in esame.</p>
+<h2 id="Pulizia-dei-dati"><strong>Pulizia dei dati</strong><a class="anchor-link" href="#Pulizia-dei-dati">&#182;</a></h2><p>La pulizia dei dati è necessaria a fornire al modello una corretta rappresentazione della realtà in esame.</p>
 
 </div>
 </div>
@@ -14044,7 +14051,7 @@ memory usage: 41.8+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -14060,7 +14067,7 @@ memory usage: 41.8+ KB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[79]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -14118,7 +14125,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;CarName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;CarName&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> 
@@ -14137,7 +14144,7 @@ dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[80]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -14174,7 +14181,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;CarName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;CarName&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;alfa-romero&#39;</span><span class="p">:</span> <span class="s1">&#39;alfa-romeo&#39;</span><span class="p">,</span> <span class="s1">&#39;maxda&#39;</span><span class="p">:</span> <span class="s1">&#39;mazda&#39;</span><span class="p">,</span>
@@ -14189,7 +14196,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -14205,7 +14212,7 @@ dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[82]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -14238,7 +14245,7 @@ dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">cat_cols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
@@ -14305,7 +14312,7 @@ memory usage: 30.2 KB
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Esplorazione-dei-dati"><strong>Esplorazione dei dati</strong><a class="anchor-link" href="#Esplorazione-dei-dati">&#182;</a></h3>
+<h2 id="Esplorazione-dei-dati"><strong>Esplorazione dei dati</strong><a class="anchor-link" href="#Esplorazione-dei-dati">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -14318,7 +14325,7 @@ memory usage: 30.2 KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;CarName&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -14363,7 +14370,7 @@ memory usage: 30.2 KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -14388,7 +14395,7 @@ memory usage: 30.2 KB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[85]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -14435,7 +14442,7 @@ memory usage: 30.2 KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
@@ -14455,7 +14462,7 @@ memory usage: 30.2 KB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[86]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -14503,7 +14510,7 @@ Superati i 30000 dollari ci troviamo in presenza di valori outliers, che indican
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
@@ -14581,7 +14588,7 @@ Superati i 30000 dollari ci troviamo in presenza di valori outliers, che indican
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">plot_correlation</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
@@ -14600,7 +14607,7 @@ Superati i 30000 dollari ci troviamo in presenza di valori outliers, che indican
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">plot_correlation</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">())</span>
@@ -14674,7 +14681,7 @@ Superati i 30000 dollari ci troviamo in presenza di valori outliers, che indican
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">old_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -14700,7 +14707,7 @@ Superati i 30000 dollari ci troviamo in presenza di valori outliers, che indican
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[90]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -14877,7 +14884,7 @@ Superati i 30000 dollari ci troviamo in presenza di valori outliers, che indican
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Feature-preprocessing"><strong>Feature preprocessing</strong><a class="anchor-link" href="#Feature-preprocessing">&#182;</a></h3>
+<h2 id="Feature-preprocessing"><strong>Feature preprocessing</strong><a class="anchor-link" href="#Feature-preprocessing">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -14890,7 +14897,7 @@ Superati i 30000 dollari ci troviamo in presenza di valori outliers, che indican
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -14929,7 +14936,7 @@ Superati i 30000 dollari ci troviamo in presenza di valori outliers, che indican
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">)</span>
@@ -14945,7 +14952,7 @@ Superati i 30000 dollari ci troviamo in presenza di valori outliers, che indican
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Modellazione"><strong>Modellazione</strong><a class="anchor-link" href="#Modellazione">&#182;</a></h3><p>Il nostro obiettivo è ottenere un modello di regressione che permetta di stimare il prezzo di entrata sul mercato di una vettura in base alle sue feature.</p>
+<h2 id="Modellazione"><strong>Modellazione</strong><a class="anchor-link" href="#Modellazione">&#182;</a></h2><p>Il nostro obiettivo è ottenere un modello di regressione che permetta di stimare il prezzo di entrata sul mercato di una vettura in base alle sue feature.</p>
 
 </div>
 </div>
@@ -14961,7 +14968,7 @@ Per prima cosa effettuiamo una grid search sul parametro alpha della regressione
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[93]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
@@ -14990,7 +14997,7 @@ Per prima cosa effettuiamo una grid search sul parametro alpha della regressione
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[93]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -15090,7 +15097,7 @@ La standardizzazione delle feature numeriche non influsice in maniera significat
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
@@ -15116,7 +15123,7 @@ La standardizzazione delle feature numeriche non influsice in maniera significat
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[94]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -15178,7 +15185,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">cat_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;enginetype&quot;</span><span class="p">,</span><span class="s2">&quot;enginelocation&quot;</span><span class="p">,</span><span class="s2">&quot;aspiration&quot;</span><span class="p">,</span><span class="s2">&quot;carbody&quot;</span><span class="p">,</span><span class="s2">&quot;cylindernumber&quot;</span><span class="p">,</span><span class="s2">&quot;drivewheel&quot;</span><span class="p">]</span>
@@ -15209,7 +15216,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[96]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
@@ -15237,7 +15244,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[96]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -15324,7 +15331,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">linear</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
@@ -15348,7 +15355,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[97]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -15383,7 +15390,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
@@ -15412,7 +15419,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[98]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -15429,7 +15436,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">gs</span><span class="o">.</span><span class="n">best_params_</span>
@@ -15445,7 +15452,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[99]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -15471,7 +15478,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[100]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
@@ -15500,7 +15507,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[100]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -15517,7 +15524,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">gs</span><span class="o">.</span><span class="n">best_params_</span>
@@ -15533,7 +15540,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[101]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -15565,7 +15572,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
@@ -15594,7 +15601,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[102]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -15611,7 +15618,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">gs</span><span class="o">.</span><span class="n">best_params_</span>
@@ -15627,7 +15634,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[103]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -15653,7 +15660,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[104]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">old_X</span> <span class="o">=</span> <span class="n">old_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CarName&quot;</span><span class="p">,</span><span class="s2">&quot;price&quot;</span><span class="p">])</span>
@@ -15672,7 +15679,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
@@ -15701,7 +15708,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[105]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -15733,7 +15740,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[106]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
@@ -15764,7 +15771,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[106]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -15781,7 +15788,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[107]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">gs</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
@@ -15797,7 +15804,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[107]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -15823,7 +15830,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Valutazione-dei-modelli-migliori"><strong>Valutazione dei modelli migliori</strong><a class="anchor-link" href="#Valutazione-dei-modelli-migliori">&#182;</a></h3><p>Andiamo a valutare con attenzione maggiore i modelli che ci hanno fornito lo score migliore.</p>
+<h2 id="Valutazione-dei-modelli-migliori"><strong>Valutazione dei modelli migliori</strong><a class="anchor-link" href="#Valutazione-dei-modelli-migliori">&#182;</a></h2><p>Andiamo a valutare con attenzione maggiore i modelli che ci hanno fornito lo score migliore.</p>
 
 </div>
 </div>
@@ -15837,7 +15844,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[108]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
@@ -15868,7 +15875,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[109]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">rbf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
@@ -15897,7 +15904,7 @@ Per esempio è possibile scartare le colonne citympg, carlength e fueltype.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Linear model train&quot;</span><span class="p">)</span>
@@ -15979,14 +15986,14 @@ Probabilmente, un dataset più grande avrebbe influito positivamente a riguardo.
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Interpretazione-della-conoscenza-appresa-dal-modello"><strong>Interpretazione della conoscenza appresa dal modello</strong><a class="anchor-link" href="#Interpretazione-della-conoscenza-appresa-dal-modello">&#182;</a></h3><p>Andiamo ad interpretare la conoscenza appresa dal modello tramite lo studio dei coefficienti degli iperpiani del modello lineare, in quanto i modelli kernel, nonostante siano più precisi, non sono direttamente interpretabili.</p>
+<h2 id="Interpretazione-della-conoscenza-appresa-dal-modello"><strong>Interpretazione della conoscenza appresa dal modello</strong><a class="anchor-link" href="#Interpretazione-della-conoscenza-appresa-dal-modello">&#182;</a></h2><p>Andiamo ad interpretare la conoscenza appresa dal modello tramite lo studio dei coefficienti degli iperpiani del modello lineare, in quanto i modelli kernel, nonostante siano più precisi, non sono direttamente interpretabili.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[111]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">cat_vars_transformed</span> <span class="o">=</span> <span class="n">linear</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s2">&quot;preproc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">named_transformers_</span><span class="p">[</span><span class="s2">&quot;categorical&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">(</span><span class="n">cat_vars</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
@@ -16004,7 +16011,7 @@ Probabilmente, un dataset più grande avrebbe influito positivamente a riguardo.
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[111]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -16064,7 +16071,7 @@ un modello di automobile con un motore a 8 cilindri subirà un incremento del pr
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[112]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-python"><pre><span></span><span class="n">linear</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s2">&quot;regr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">intercept_</span>
@@ -16080,7 +16087,7 @@ un modello di automobile con un motore a 8 cilindri subirà un incremento del pr
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[112]:</div>
+    <div class="prompt output_prompt">Out[&nbsp;]:</div>
 
 
 
@@ -16107,7 +16114,7 @@ Questo fa capire che ci sono feature che inevitabilmente andranno a portare il v
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Conclusioni"><strong>Conclusioni</strong><a class="anchor-link" href="#Conclusioni">&#182;</a></h3><p>Abbiamo visto come sia possibile addestrare un modello di regressione per determinare il prezzo di mercato di un modello di automobile, basandoci sulle caratteristiche dei modelli già presenti nel listino, ottenendo buoni risultati in termini di efficacia, precisione e coerenza con la realtà del dominio applicativo.</p>
+<h2 id="Conclusioni"><strong>Conclusioni</strong><a class="anchor-link" href="#Conclusioni">&#182;</a></h2><p>Abbiamo visto come sia possibile addestrare un modello di regressione per determinare il prezzo di mercato di un modello di automobile, basandoci sulle caratteristiche dei modelli già presenti nel listino, ottenendo buoni risultati in termini di efficacia, precisione e coerenza con la realtà del dominio applicativo.</p>
 
 </div>
 </div>
